@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/form.css" />
+    <!-- <script src="script.js" defer></script> -->
+    <title>MTTB || Ticket Booking</title>
+  </head>
+  <body>
+    <form action="#" class="form">
+      <h1 class="text-center">QR Ticket</h1>
+      <!-- Progress bar -->
+      <div class="progressbar">
+        <div class="progress" id="progress"></div>
+        
+        <div
+          class="progress-step progress-step-active"
+          data-title=""
+        ></div>
+        <div class="progress-step" data-title=""></div>
+        <div class="progress-step" data-title=""></div>
+        <div class="progress-step" data-title=""></div>
+      </div>
+
+      <!-- Steps -->
+      <div class="form-step form-step-active">
+        <div class="input-group">
+          <label for="username">Origin</label>
+          <select>
+            <option>Select Origin</option>
+            <option>AG – DMS</option>
+            <option>Anna Nagar East</option>
+            <option>Anna Nagar Tower</option>
+            <option>Arignar Anna Alandur</option>
+            <option>Arumbakkam</option>
+            <option>Chennai International Airport</option>
+            <option>Egmore</option>
+          </select>
+        </div>
+        <div class="input-group">
+          <label for="position">Destination</label>
+          <select>
+            <option>Select Destination</option>
+            <option>AG – DMS</option>
+            <option>Anna Nagar East</option>
+            <option>Anna Nagar Tower</option>
+            <option>Arignar Anna Alandur</option>
+            <option>Arumbakkam</option>
+          </select>
+        </div>
+        <div class="">
+          <a href="#" class="btn btn-next width-50 ml-auto">Next</a>
+        </div>
+      </div>
+      <div class="form-step">
+        <div class="input-group">
+          <label for="phone">Mobile</label>
+          <input type="text" name="phone" id="phone" />
+        </div>
+        <div class="input-group">
+          <label for="email">Email</label>
+          <input type="text" name="email" id="email" />
+        </div>
+        <div class="btns-group">
+          <a href="#" class="btn btn-prev">Previous</a>
+          <a href="#" class="btn btn-next">Next</a>
+        </div>
+      </div>
+      <div class="form-step">
+        <div class="input-group">
+          <label for="dob">Date Of Journey</label>
+          <input type="date" name="dob" id="dob" />
+        </div>
+        <div class="input-group">
+          <label for="ID">Ticket Type</label>
+          <select>
+            <option>Select Ticket Type</option>
+            <option>Single Journey</option>
+          </select>
+        </div>
+        <div class="btns-group">
+            <a href="#" class="btn btn-prev">Previous</a>
+            <a href="#" class="btn btn-next">Next</a>
+          </div>
+      </div>
+      <div class="form-step">
+        <div class="input-group">
+          <label for="password">Number of Ticket</label>
+          <input type="text" name="password" id="password" />
+        </div>
+        <div class="input-group">
+          <label for="confirmPassword">Total Fare</label>
+          <input
+            type="text"
+            name="confirmPassword"
+            id="confirmPassword"
+          />
+        </div>
+        <div class="btns-group">
+            <a href="#" class="btn btn-prev">Previous</a>
+            <input type="submit" value="Submit" class="btn" />
+          </div>
+      </div>
+    </form>
+  </body>
+</html>
+<script>
+    const prevBtns = document.querySelectorAll(".btn-prev");
+const nextBtns = document.querySelectorAll(".btn-next");
+const progress = document.getElementById("progress");
+const formSteps = document.querySelectorAll(".form-step");
+const progressSteps = document.querySelectorAll(".progress-step");
+
+let formStepsNum = 0;
+
+nextBtns.forEach((btn) => {
+  btn.addEventListener("click", () => {
+    formStepsNum++;
+    updateFormSteps();
+    updateProgressbar();
+  });
+});
+
+prevBtns.forEach((btn) => {
+  btn.addEventListener("click", () => {
+    formStepsNum--;
+    updateFormSteps();
+    updateProgressbar();
+  });
+});
+
+function updateFormSteps() {
+  formSteps.forEach((formStep) => {
+    formStep.classList.contains("form-step-active") &&
+      formStep.classList.remove("form-step-active");
+  });
+
+  formSteps[formStepsNum].classList.add("form-step-active");
+}
+
+function updateProgressbar() {
+  progressSteps.forEach((progressStep, idx) => {
+    if (idx < formStepsNum + 1) {
+      progressStep.classList.add("progress-step-active");
+    } else {
+      progressStep.classList.remove("progress-step-active");
+    }
+  });
+
+  const progressActive = document.querySelectorAll(".progress-step-active");
+
+  progress.style.width =
+    ((progressActive.length - 1) / (progressSteps.length - 1)) * 100 + "%";
+}
+</script>
